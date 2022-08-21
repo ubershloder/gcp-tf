@@ -22,8 +22,9 @@ resource "google_compute_firewall" "main" {
   network = google_compute_network.vpc.name
   allow {
     protocol = "tcp"
-    ports    = ["22"]
+    ports    = ["22", "80"]
   }
-
-  source_tags = ["web"]
+  target_tags   = ["server-ssh"]
+  source_tags   = ["web"]
+  source_ranges = ["0.0.0.0/0"]
 }

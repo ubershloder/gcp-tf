@@ -7,13 +7,16 @@ resource "google_compute_instance" "vm_instance" {
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-11"
+      image = "centos-7-v20220719"
     }
   }
+  
+ metadata_startup_script = file("start.sh")
 
   network_interface {
     subnetwork = google_compute_subnetwork.subnet.name
     access_config {
     }
   }
+  tags = ["server-ssh"]
 }
